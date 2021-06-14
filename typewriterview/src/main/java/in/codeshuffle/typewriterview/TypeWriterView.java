@@ -85,18 +85,6 @@ public class TypeWriterView extends AppCompatTextView {
 
 
     /**
-     * plays music of type writer as characters are displayed, using MediaPlayer API
-     */
-    private void playMusic() {
-        if (mWithMusic) {
-            mPlayer = MediaPlayer.create(getContext(), R.raw.typing);
-            mPlayer.setLooping(true);
-            mPlayer.start();
-        }
-    }
-
-
-    /**
      * Call this function to display
      *
      * @param text attribute
