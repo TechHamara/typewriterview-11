@@ -104,6 +104,10 @@ public class TypeWriterView extends AppCompatTextView {
         if (delay >= 20 && delay <= 150)
             this.mDelay = delay;
     }
+public void setTypeface (Typeface tf, 
+                int style) {
+    
+}
 
 
 
