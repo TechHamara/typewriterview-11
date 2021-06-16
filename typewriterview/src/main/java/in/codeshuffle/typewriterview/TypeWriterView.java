@@ -1,16 +1,14 @@
-package in.codeshuffle.typewriterview;
+package com.TypeWriter;
+
 
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.widget.Toast;
-
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView;
 
-/**
- * Created by P SANDESH BALIGA in Roshan Hospitality, Koramangala on 21/02/2018.
- */
 
 public class TypeWriterView extends AppCompatTextView {
 
@@ -24,7 +22,6 @@ public class TypeWriterView extends AppCompatTextView {
     private Context mContext;
     private TypeWriterListener mTypeWriterListener;
 
-    private boolean mWithMusic = true;
     private boolean animating = false;
 
     private Runnable mBlinker;
@@ -41,15 +38,6 @@ public class TypeWriterView extends AppCompatTextView {
 
                 if (mIndex <= mText.length()) {
                     mHandler.postDelayed(mCharacterAdder, mDelay);
-                } else {
-                    if (mWithMusic)
-                        mPlayer.stop();
-                    //typing end
-                    if (mTypeWriterListener != null)
-                        mTypeWriterListener.onTypingEnd(mPrintingText);
-
-                    animating = false;
-                    callBlink();
                 }
             }
         }
@@ -95,7 +83,6 @@ public class TypeWriterView extends AppCompatTextView {
             mText = text;
             mPrintingText = text;
             mIndex = 0;
-            playMusic();
             setText("");
             mHandler.removeCallbacks(mCharacterAdder);
             //typing start
@@ -118,23 +105,13 @@ public class TypeWriterView extends AppCompatTextView {
             this.mDelay = delay;
     }
 
-    /**
-     * Whether to play music or not while animating
-     *
-     * @param music
-     */
-    public void setWithMusic(boolean music) {
-        mWithMusic = music;
-    }
+
 
     /**
      * Call this to remove animation at any time
      */
     public void removeAnimation() {
         mHandler.removeCallbacks(mCharacterAdder);
-
-        if (mWithMusic && mPlayer != null && mPlayer.isPlaying())
-            mPlayer.stop();
 
         animating = false;
         setText(mPrintingText);
